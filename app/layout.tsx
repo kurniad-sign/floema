@@ -1,20 +1,16 @@
-import { createClient } from '@/prismicio';
 import { PrismicPreview } from '@prismicio/next';
 
+import { getMetadata } from '@/lib/fetch-prismic';
 import { suisse } from '@/lib/fonts';
 
 import '@/styles/index.scss';
 
 export async function generateMetadata() {
-  const client = createClient();
-  const metadata = await client.getSingle('metadata');
+  const metadata = await getMetadata();
 
   return {
-    title: metadata.data.title,
-    description: metadata.data.description,
-    openGraph: {
-      images: metadata.data.image.url,
-    },
+    title: metadata.title,
+    description: metadata.description,
   };
 }
 
