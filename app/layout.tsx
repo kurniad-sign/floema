@@ -1,5 +1,6 @@
 import { PrismicPreview } from '@prismicio/next';
 
+import { Navigation } from '@/components/navigation';
 import { getMetadata } from '@/lib/fetch-prismic';
 import { suisse } from '@/lib/fonts';
 
@@ -21,7 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={suisse.className}>{children}</body>
+      <body className={suisse.className}>
+        <Navigation />
+        {children}
+      </body>
       <PrismicPreview repositoryName="floema-exam" />
     </html>
   );
