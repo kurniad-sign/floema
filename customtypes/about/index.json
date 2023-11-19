@@ -1,0 +1,140 @@
+{
+  "id": "about",
+  "label": "About",
+  "repeatable": false,
+  "json": {
+    "Main": {
+      "gallery": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "image": {
+              "type": "Image",
+              "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image"
+              }
+            }
+          },
+          "label": "Gallery"
+        }
+      },
+      "body": {
+        "type": "Slices",
+        "fieldset": "Slice zone",
+        "config": {
+          "labels": null,
+          "choices": {
+            "title": {
+              "type": "Slice",
+              "fieldset": "Title",
+              "description": "Title",
+              "icon": "3d_rotation",
+              "display": "list",
+              "non-repeat": {
+                "text": {
+                  "type": "Text",
+                  "config": {
+                    "label": "Text"
+                  }
+                }
+              },
+              "repeat": {}
+            },
+            "content": {
+              "type": "Slice",
+              "fieldset": "Content",
+              "description": "Content",
+              "icon": "3d_rotation",
+              "display": "list",
+              "non-repeat": {
+                "label": {
+                  "type": "Text",
+                  "config": {
+                    "label": "Label"
+                  }
+                },
+                "description": {
+                  "type": "StructuredText",
+                  "config": {
+                    "multi": "paragraph,strong,em,hyperlink",
+                    "label": "Description"
+                  }
+                },
+                "image": {
+                  "type": "Image",
+                  "config": {
+                    "constraint": {},
+                    "thumbnails": [],
+                    "label": "image"
+                  }
+                },
+                "type": {
+                  "type": "Select",
+                  "config": {
+                    "options": ["Left", "Right"],
+                    "default_value": "Left",
+                    "label": "Type"
+                  }
+                }
+              },
+              "repeat": {}
+            },
+            "highlight": {
+              "type": "Slice",
+              "fieldset": "Highlight",
+              "description": "Highlight",
+              "icon": "3d_rotation",
+              "display": "list",
+              "non-repeat": {
+                "label": {
+                  "type": "Text",
+                  "config": {
+                    "label": "Label"
+                  }
+                },
+                "title": {
+                  "type": "Text",
+                  "config": {
+                    "label": "Title"
+                  }
+                }
+              },
+              "repeat": {
+                "image": {
+                  "type": "Image",
+                  "config": {
+                    "constraint": {},
+                    "thumbnails": [],
+                    "label": "image"
+                  }
+                }
+              }
+            },
+            "gallery": {
+              "type": "Slice",
+              "fieldset": "Gallery",
+              "description": "Gallery",
+              "icon": "3d_rotation",
+              "display": "list",
+              "non-repeat": {},
+              "repeat": {
+                "image": {
+                  "type": "Image",
+                  "config": {
+                    "constraint": {},
+                    "thumbnails": [],
+                    "label": "Image"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": true,
+  "format": "custom"
+}
