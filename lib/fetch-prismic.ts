@@ -13,3 +13,12 @@ export async function getAbout() {
 
   return page.data;
 }
+
+export async function getDetail(uid: string) {
+  const client = createClient();
+  const page = await client.getByUID('produ', uid, {
+    fetchLinks: 'col.title',
+  });
+
+  return page.data;
+}
