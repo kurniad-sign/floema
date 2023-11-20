@@ -1,10 +1,15 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { PrismicNextImage } from '@prismicio/next';
 
 import { getDetail } from '@/lib/fetch-prismic';
 
 export default async function Detail({ params }: { params: { uid: string } }) {
   const detail = await getDetail(params.uid);
+
+  if (!detail) {
+    notFound();
+  }
 
   return (
     <div className="detail">
