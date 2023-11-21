@@ -65,3 +65,11 @@ export async function getHome() {
     home: home.data,
   };
 }
+
+export async function getNavigation() {
+  const client = createClient();
+
+  const navigation = await client.getSingle('navigation');
+
+  return navigation.data;
+}

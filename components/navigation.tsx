@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export function Navigation() {
+export async function Navigation() {
   return (
     <nav className="navigation">
       <div className="navigation__wrapper">
