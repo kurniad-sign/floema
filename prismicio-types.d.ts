@@ -375,12 +375,71 @@ interface HDocumentData {
 export type HDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<HDocumentData>, 'h', Lang>;
 
+/**
+ * Item in *Homepage → Gallery*
+ */
+export interface HomepageDocumentDataGalleryItem {
+  /**
+   * Image field in *Homepage → Gallery*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.gallery[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
 type HomepageDocumentDataSlicesSlice = never;
 
 /**
  * Content for Homepage documents
  */
 interface HomepageDocumentData {
+  /**
+   * Gallery field in *Homepage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.gallery[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  gallery: prismic.GroupField<Simplify<HomepageDocumentDataGalleryItem>>;
+
+  /**
+   * Collections field in *Homepage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.collections
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  collections: prismic.KeyTextField;
+
+  /**
+   * Collection field in *Homepage*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.collection
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  collection: prismic.ContentRelationshipField<'collections'>;
+
+  /**
+   * Button field in *Homepage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button: prismic.KeyTextField;
+
   /**
    * Slice Zone field in *Homepage*
    *
@@ -434,7 +493,7 @@ interface HomepageDocumentData {
  * @typeParam Lang - Language API ID of the document.
  */
 export type HomepageDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
+  prismic.PrismicDocumentWithUID<
     Simplify<HomepageDocumentData>,
     'homepage',
     Lang
@@ -750,6 +809,33 @@ export type AllDocumentTypes =
   | PreloaderDocument
   | ProduDocument;
 
+/**
+ * Default variation for Links Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LinksSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *Links*
+ */
+type LinksSliceVariation = LinksSliceDefault;
+
+/**
+ * Links Shared Slice
+ *
+ * - **API ID**: `links`
+ * - **Description**: Links
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LinksSlice = prismic.SharedSlice<'links', LinksSliceVariation>;
+
 declare module '@prismicio/client' {
   interface CreateClient {
     (
@@ -779,6 +865,7 @@ declare module '@prismicio/client' {
       HDocumentDataGalleryItem,
       HomepageDocument,
       HomepageDocumentData,
+      HomepageDocumentDataGalleryItem,
       HomepageDocumentDataSlicesSlice,
       MetadataDocument,
       MetadataDocumentData,
@@ -792,6 +879,9 @@ declare module '@prismicio/client' {
       ProduDocumentDataHighlightItem,
       ProduDocumentDataInformationItem,
       AllDocumentTypes,
+      LinksSlice,
+      LinksSliceVariation,
+      LinksSliceDefault,
     };
   }
 }
