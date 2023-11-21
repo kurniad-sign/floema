@@ -44,3 +44,24 @@ export async function getCollections() {
     home: home.data,
   };
 }
+
+export async function getHome() {
+  const client = createClient();
+  const home = await client.getSingle('h');
+  const collections = await client.getAllByType<
+    Content.ColDocument & {
+      data: {
+        products: Array<{
+          products_product: Content.ProduDocument;
+        }>;
+      };
+    }
+  >('col', {
+    fetchLinks: 'produ.product',
+  });
+
+  return {
+    collections: collections.map((collection) => collection.data),
+    home: home.data,
+  };
+}
