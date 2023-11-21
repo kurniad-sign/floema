@@ -37,7 +37,7 @@ export default async function Collections() {
               col.products.map((product) => (
                 <Link
                   key={product.products_product.id}
-                  href={'/'}
+                  href={`/detail/${product.products_product.uid}`}
                   className="collections__gallery__link"
                 >
                   <figure className="collections__gallery__media">
