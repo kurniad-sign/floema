@@ -1,4 +1,5 @@
 import { createClient } from '@/prismicio';
+import { Content } from '@prismicio/client';
 
 export async function getMetadata() {
   const client = createClient();
@@ -21,4 +22,25 @@ export async function getDetail(uid: string) {
   });
 
   return page.data;
+}
+
+export async function getCollections() {
+  const client = createClient();
+  const home = await client.getSingle('h');
+  const collections = await client.getAllByType<
+    Content.ColDocument & {
+      data: {
+        products: Array<{
+          products_product: Content.ProduDocument;
+        }>;
+      };
+    }
+  >('col', {
+    fetchLinks: 'produ.product',
+  });
+
+  return {
+    collections: collections.map((collection) => collection.data),
+    home: home.data,
+  };
 }
